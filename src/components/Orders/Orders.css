@@ -1,0 +1,54 @@
+/* Base styles for the Orders component */
+.orders-container {
+    padding: 20px;
+    background: var(--glass);
+    border-radius: 1rem;
+    box-shadow: var(--boxShadow);
+    color: var(--black);
+  }
+  
+  .orders-container h2 {
+    margin-bottom: 20px;
+    font-size: 1.5em;
+    color: var(--black);
+    font-weight: bold;
+  }
+  
+  .orders-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .orders-table th,
+  .orders-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid var(--gray);
+  }
+  
+  .orders-table th {
+    background: var(--yellow);
+    color: var(--black);
+    font-weight: bold;
+  }
+  
+  .orders-table tr:hover {
+    background: var(--glass);
+  }
+  
+  .status {
+    font-weight: bold;
+  }
+  
+  .status.shipped {
+    color: var(--orange);
+  }
+  
+  .status.delivered {
+    color: var(--purple);
+  }
+  
+  .status.pending {
+    color: var(--pink);
+  }
+  
