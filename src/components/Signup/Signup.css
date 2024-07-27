@@ -1,0 +1,142 @@
+:root {
+  --yellow: linear-gradient(180deg, #F8D49A -146.42%, #FAD79D -46.42%);
+  --orange: #fca61f;
+  --black: #242d49;
+  --gray: #788097;
+  --purple: linear-gradient(180deg, #BB67FF 0%, #C484F3 100%);
+  --pink: #FF919D;
+  --glass: rgba(255, 255, 255, 0.54);
+  --boxShadow: 0px 19px 60px rgb(0 0 0 / 8%);
+  --smboxShadow: -79px 51px 60px rgba(0, 0, 0, 0.08);
+  --activeItem: #f799a354;
+}
+
+.signup-container {
+  display: flex;
+  min-height: 100vh;
+  background: linear-gradient(
+    106.37deg,
+    #ffe1bc 29.63%,
+    #ffcfd1 51.55%,
+    #f3c6f1 90.85%
+  );
+  font-family: 'Inter', sans-serif;
+  align-items: center;
+  justify-content: center;
+}
+
+.signup-left, .signup-right {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.signup-left {
+  background: var(--purple);
+  color: white;
+  text-align: center;
+}
+
+.signup-header {
+  margin-bottom: 20px;
+}
+
+.signup-header img {
+  max-width: 100px;
+}
+
+.signup-welcome h2 {
+  font-size: 2.5em;
+  margin-bottom: 10px;
+}
+
+.signup-welcome p {
+  font-size: 1.2em;
+}
+
+.signup-right {
+  background-color: white;
+  box-shadow: var(--boxShadow);
+  border-radius: 8px;
+  padding: 40px;
+}
+
+.signup-box {
+  width: 100%;
+  max-width: 400px;
+}
+
+.signup-box form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  font-size: 1em;
+  color: var(--black);
+  margin-bottom: 5px;
+  display: block;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid var(--gray);
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.form-group input:focus {
+  border-color: var(--orange);
+  outline: none;
+}
+
+.error {
+  color: red;
+  margin-bottom: 20px;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: var(--orange);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1em;
+}
+
+button:hover {
+  background-color: var(--black);
+}
+
+.additional-options {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.additional-options p {
+  margin: 0;
+}
+
+.additional-options a {
+  color: var(--orange);
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.additional-options a:hover {
+  text-decoration: underline;
+}
+
+.log {
+  font-size: 2em;
+  margin-bottom: 20px;
+  color: var(--orange);
+}

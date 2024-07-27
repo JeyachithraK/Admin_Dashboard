@@ -75,7 +75,7 @@ export default function BasicTable() {
                   <TableCell align="left">
                     <span className="status" style={makeStyle(row.status)}>{row.status}</span>
                   </TableCell>
-                  <TableCell align="left" className="Details">Details</TableCell>
+                  {/* <TableCell align="left" className="Details">Details</TableCell> */}
                 </TableRow>
               ))}
             </TableBody>

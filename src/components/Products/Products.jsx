@@ -1,58 +1,41 @@
-// import React from 'react';
-// import './Products.css'; // Make sure this path is correct
-
-// const Products = () => {
-//   const products = [
-//     { name: 'Product A', category: 'Electronics', price: '$199.99', stock: 'In Stock' },
-//     { name: 'Product B', category: 'Apparel', price: '$49.99', stock: 'Out of Stock' },
-//     { name: 'Product C', category: 'Home Goods', price: '$29.99', stock: 'In Stock' },
-//     // Add more products as needed
-//   ];
-
-//   return (
-//     <div className="products-container">
-//       <h2>Products</h2>
-//       <table className="products-table">
-//         <thead>
-//           <tr>
-//             <th>Product Name</th>
-//             <th>Category</th>
-//             <th>Price</th>
-//             <th>Stock Status</th>
-//           </tr>
-//         </thead>
-//         <tbody>
-//           {products.map((product, index) => (
-//             <tr key={index}>
-//               <td>{product.name}</td>
-//               <td>{product.category}</td>
-//               <td>{product.price}</td>
-//               <td className={`status ${product.stock.toLowerCase().replace(/\s+/g, '-')}`}>{product.stock}</td>
-//             </tr>
-//           ))}
-//         </tbody>
-//       </table>
-//     </div>
-//   );
-// };
-
-// export default Products;
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './Products.css';
 
 const Products = () => {
   const [products, setProducts] = useState([]);
+  const [newProduct, setNewProduct] = useState({ name: '', price: '', description: '' });
 
   useEffect(() => {
-    axios.get('http://localhost:8080/products')
-      .then(response => {
-        setProducts(response.data);
-      })
-      .catch(error => {
-        console.error("There was an error fetching the products!", error);
-      });
+    fetchProducts();
   }, []);
+
+  const fetchProducts = async () => {
+    const response = await axios.get('http://localhost:8080/products');
+    setProducts(response.data);
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setNewProduct({ ...newProduct, [name]: value });
+  };
+
+  const handleAddProduct = async () => {
+    await axios.post('http://localhost:8080/products', newProduct);
+    fetchProducts();
+    setNewProduct({ name: '', price: '', description: '' });
+  };
+
+  const handleUpdateProduct = async (id) => {
+    const updatedProduct = products.find(product => product.id === id);
+    await axios.put(`http://localhost:8080/products/${id}`, updatedProduct);
+    fetchProducts();
+  };
+
+  const handleDeleteProduct = async (id) => {
+    await axios.delete(`http://localhost:8080/products/${id}`);
+    fetchProducts();
+  };
 
   return (
     <div className="products-container">
@@ -61,23 +44,32 @@ const Products = () => {
         <thead>
           <tr>
             <th>Name</th>
-            <th>Description</th>
             <th>Price</th>
+            <th>Description</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
           {products.map(product => (
             <tr key={product.id}>
               <td>{product.name}</td>
-              <td>{product.description}</td>
               <td>{product.price}</td>
+              <td>{product.description}</td>
+              <td>
+                {/* <button onClick={() => handleUpdateProduct(product.id)}>Update</button> */}
+                <button onClick={() => handleDeleteProduct(product.id)}>Delete</button>
+              </td>
             </tr>
           ))}
         </tbody>
       </table>
+      <h3>Add New Product</h3>
+      <input type="text" name="name" value={newProduct.name} onChange={handleInputChange} placeholder="Name" />
+      <input type="text" name="price" value={newProduct.price} onChange={handleInputChange} placeholder="Price" />
+      <input type="text" name="description" value={newProduct.description} onChange={handleInputChange} placeholder="Description" />
+      <button onClick={handleAddProduct}>Add Product</button>
     </div>
   );
 };
 
 export default Products;
-
