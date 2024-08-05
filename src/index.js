@@ -9,7 +9,7 @@ import MainDash from './components/MainDash/MainDash';
 import Orders from './components/Orders/Orders';
 import Customers from './components/Customers/Customer';
 import Products from './components/Products/Products';
-
+import Reviews from './components/Reviews/Reviews';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
@@ -21,6 +21,7 @@ root.render(
         <Route path="/orders" element={<App><Orders /></App>} />
         <Route path="/customers" element={<App><Customers /></App>} />
         <Route path="/products" element={<App><Products /></App>} />
+        <Route path="/reviews" element={<App><Reviews /></App>} />
       {/* <Route path="/dashboard" element={<MainDash />} />
       <Route path="/orders" element={<Orders/>} />
       <Route path="/customers" element={<Customers/>} />

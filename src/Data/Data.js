@@ -4,6 +4,7 @@ import {
   UilClipboardAlt,
   UilUsersAlt,
   UilPackage,
+  UilCommentAlt,
   UilChart,
   UilSignOutAlt,
 } from "@iconscout/react-unicons";
@@ -34,6 +35,10 @@ export const SidebarData = [
   {
     icon: UilPackage,
     heading: 'Products'
+  },
+  {
+    icon: UilCommentAlt,
+    heading: 'Reviews'
   },
   
 ];

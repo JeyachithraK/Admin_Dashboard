@@ -1,81 +1,131 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './Customers.css';
+import CustomerPieChartModal from './CustomerPieChartModal';
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
+
+ChartJS.register(ArcElement, Tooltip, Legend);
 
 const Customers = () => {
   const [customers, setCustomers] = useState([]);
-  const [newCustomer, setNewCustomer] = useState({ name: '', email: '', phone: '' });
+  const [showChart, setShowChart] = useState(false);
+  const [newCustomer, setNewCustomer] = useState({ name: '', email: '', phone: '', status: 'Active' });
 
   useEffect(() => {
     fetchCustomers();
   }, []);
 
   const fetchCustomers = async () => {
-    const response = await axios.get('http://localhost:8080/customers');
-    setCustomers(response.data);
-  };
-
-  const handleInputChange = (e, id) => {
-    const { name, value } = e.target;
-    if (id) {
-      setCustomers(prevCustomers => 
-        prevCustomers.map(customer => 
-          customer.id === id ? { ...customer, [name]: value } : customer
-        )
-      );
-    } else {
-      setNewCustomer({ ...newCustomer, [name]: value });
+    try {
+      const response = await axios.get('http://localhost:8080/api/customers');
+      setCustomers(response.data);
+    } catch (error) {
+      console.error('Error fetching customers:', error);
     }
   };
 
-  const handleAddCustomer = async () => {
-    await axios.post('http://localhost:8080/customers', newCustomer);
-    fetchCustomers();
-    setNewCustomer({ name: '', email: '', phone: '' });
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setNewCustomer({ ...newCustomer, [name]: value });
   };
 
-  // const handleUpdateCustomer = async (id) => {
-  //   const updatedCustomer = customers.find(customer => customer.id === id);
-  //   await axios.put(`http://localhost:8080/customers/${id}`, updatedCustomer);
-  //   fetchCustomers();
-  // };
+  const handleAddCustomer = async () => {
+    try {
+      const response = await axios.post('http://localhost:8080/api/customers', newCustomer);
+      fetchCustomers();
+      setNewCustomer({ name: '', email: '', phone: '', status: 'Active' });
+    } catch (error) {
+      console.error('Error adding customer:', error);
+    }
+  };
 
   const handleDeleteCustomer = async (id) => {
-    await axios.delete(`http://localhost:8080/customers/${id}`);
-    fetchCustomers();
+    try {
+      await axios.delete(`http://localhost:8080/api/customers/${id}`);
+      fetchCustomers();
+    } catch (error) {
+      console.error('Error deleting customer:', error);
+    }
+  };
+
+  const toggleChart = () => {
+    setShowChart(!showChart);
+  };
+
+  const statusCounts = customers.reduce((acc, customer) => {
+    const status = customer.status || 'Active';
+    acc[status] = (acc[status] || 0) + 1;
+    return acc;
+  }, {});
+
+  const chartData = {
+    labels: Object.keys(statusCounts),
+    datasets: [
+      {
+        data: Object.values(statusCounts),
+        backgroundColor: ['rgba(75, 192, 192, 0.2)', 'rgba(255, 99, 132, 0.2)'],
+        borderColor: ['rgba(75, 192, 192, 1)', 'rgba(255, 99, 132, 1)'],
+        borderWidth: 1
+      }
+    ]
   };
 
   return (
     <div className="customers-container">
-      <h2>Customers</h2>
-      <table className="customers-table">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Phone</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {customers.map(customer => (
-            <tr key={customer.id}>
-              <td>{customer.name}</td>
-              <td>{customer.email}</td>
-              <td>{customer.phone}</td>
-              <td>
-                {/* <button onClick={() => handleUpdateCustomer(customer.id)}>Update</button> */}
-                <button onClick={() => handleDeleteCustomer(customer.id)}>Delete</button>
-              </td>
+      <div className="add-customer-section">
+        <h3>Add New Customer</h3>
+        <input type="text" name="name" value={newCustomer.name} onChange={handleInputChange} placeholder="Name" />
+        <input type="email" name="email" value={newCustomer.email} onChange={handleInputChange} placeholder="Email" />
+        <input type="text" name="phone" value={newCustomer.phone} onChange={handleInputChange} placeholder="Phone" />
+        <select className="sel" name="status" value={newCustomer.status} onChange={handleInputChange}>
+          <option value="Active">Active</option>
+          <option value="Inactive">Inactive</option>
+        </select>
+        <br></br>
+        <div>
+          <button onClick={handleAddCustomer}>Add Customer</button>
+        </div>
+      </div>
+
+      <div className="customers-table-container">
+        <h2>Customers</h2>
+        <table className="customers-table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Phone</th>
+              <th>Status</th>
+              <th>Action</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
-      <h3>Add New Customer</h3>
-      <input type="text" name="name" value={newCustomer.name} onChange={handleInputChange} placeholder="Name" />
-      <input type="email" name="email" value={newCustomer.email} onChange={handleInputChange} placeholder="Email" />
-      <input type="text" name="phone" value={newCustomer.phone} onChange={handleInputChange} placeholder="Phone" />
-      <button onClick={handleAddCustomer}>Add Customer</button>
+          </thead>
+          <tbody>
+            {customers.map(customer => (
+              <tr key={customer.id}>
+                <td>{customer.name}</td>
+                <td>{customer.email}</td>
+                <td>{customer.phone}</td>
+                <td>{customer.status}</td>
+                <td>
+                  <button onClick={() => handleDeleteCustomer(customer.id)}>Delete</button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <div className="pie-chart-link">
+        <a href="#" onClick={toggleChart}>
+          Wanna see pie-chart?
+        </a>
+      </div>
+
+      <CustomerPieChartModal
+        show={showChart}
+        onClose={toggleChart}
+        chartData={chartData}
+      />
     </div>
   );
 };

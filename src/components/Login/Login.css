@@ -120,3 +120,13 @@ button:hover {
   margin-bottom: 20px;
   color: #4caf50;
 }
+
+.link-button {
+  background: none;
+  border: none;
+  color: #4caf50;
+  text-decoration: underline;
+  cursor: pointer;
+  font-size: inherit;
+  padding: 0;
+}

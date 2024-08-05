@@ -1,0 +1,77 @@
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  .modal-content {
+    background: linear-gradient(45deg, #9d50bb, #6e48aa);
+
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(240, 238, 238, 0.484);
+    text-align: center;
+    width: 90%;
+    max-width: 900px;
+    position: relative;
+    z-index: 1001;
+    height: 80%;
+  }
+  
+  .pie-chart-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    width: 100%;
+    height: 480px;
+  }
+  
+  .close-icon {
+    position: absolute;
+    top: -29px;
+    right: -13px;
+    font-size: 18px;
+    color: white;
+    cursor: pointer;
+  }
+  
+  .close-icon:hover {
+    color: #ff0000;
+  }
+  
+  .modal-content h3,
+  .modal-content p,
+  .modal-content span,
+  .modal-content div {
+    color: white;
+  }
+  
+  .pie-chart-container canvas {
+    filter: drop-shadow(0 0 10px rgba(200, 200, 200, 0));
+  }
+  
+  /* Container for the chart controls */
+  .chart-controls {
+    position: absolute;
+    top: 50px;
+    left: 800px;
+    display: flex;
+    gap: 10px;
+    z-index: 1001;
+  }
+  
+  /* Style for the individual chart control icons */
+  .chart-control-icon {
+    cursor: pointer;
+    font-size: 18px;
+    color: white;
+  }
+  

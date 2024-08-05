@@ -1,24 +1,37 @@
+/* Container for the entire products section */
 .products-container {
   padding: 20px;
   background-color: #f9f9f9;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  height: 590px; /* Fixed height for the container */
+  overflow-y: auto; /* Vertical scrolling */
+  margin-top: 29px;
+  margin-bottom: 23px;
+  margin-left: 15px;
 }
 
+/* Styling for headings within the products container */
 .products-container h2, .products-container h3 {
   margin-bottom: 20px;
   font-size: 1.5em;
   color: #333;
 }
 
-.products-table {
-  width: 100%;
-  border-collapse: collapse;
+/* Section for adding a new product */
+.add-product-section {
   margin-bottom: 20px;
 }
 
+/* Table styling for displaying products */
+.products-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px; /* Adjust font size */
+}
+
 .products-table th, .products-table td {
-  padding: 12px;
+  padding: 8px; /* Match padding */
   text-align: left;
   border-bottom: 1px solid #ddd;
 }
@@ -32,34 +45,53 @@
   background-color: #f1f1f1;
 }
 
+/* Input field styling within the products table */
 .products-table input {
   width: 100%;
-  padding: 8px;
+  padding: 6px; /* Match padding */
   box-sizing: border-box;
 }
 
 .products-container button {
-  padding: 10px 20px;
+  padding: 8px 16px; /* Match padding */
   background-color: #4caf50;
   color: white;
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  margin-top: 5px;
 }
 
 .products-container button:hover {
   background-color: #45a049;
 }
 
+/* Input field styling for text and email in the products section */
 .products-container input[type="text"], .products-container input[type="email"] {
-  width: calc(100% - 24px);
-  padding: 10px;
+  width: calc(100% - 16px); /* Adjust width */
+  padding: 8px; /* Match padding */
   margin: 5px 0;
   box-sizing: border-box;
   border: 1px solid #ccc;
   border-radius: 4px;
 }
 
+/* Focus state styling for text and email inputs */
 .products-container input[type="text"]:focus, .products-container input[type="email"]:focus {
   border: 1px solid #4caf50;
+}
+
+/* Link styling for pie chart visibility */
+.pie-chart-link {
+  margin-top: 20px;
+}
+
+.pie-chart-link a {
+  color: #4caf50; /* Changed to match button color */
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.pie-chart-link a:hover {
+  color: #45a049; /* Darker shade for hover effect */
 }

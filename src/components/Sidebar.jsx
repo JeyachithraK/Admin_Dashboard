@@ -4,40 +4,39 @@ import Logo from "../imgs/logo.png";
 import { UilSignOutAlt, UilBars } from "@iconscout/react-unicons";
 import { SidebarData } from "../Data/Data";
 import { motion } from "framer-motion";
-import { NavLink } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import { FaStar } from 'react-icons/fa'; // Example icon
 
 const Sidebar = () => {
   const [selected, setSelected] = useState(0);
-  const [expanded, setExpaned] = useState(true);
+  const [expanded, setExpanded] = useState(true);
   const navigate = useNavigate();
 
   const sidebarVariants = {
-    true: {
-      left: '0'
-    },
-    false: {
-      left: '-60%'
-    }
+    true: { left: '0' },
+    false: { left: '-60%' }
   };
 
   const handleSignOut = () => {
     if (window.confirm('Are you sure you want to log out?')) {
-      alert("You will be redirected to login")
+      alert("You will be redirected to login");
       setTimeout(() => {
         navigate('/login');
       }, 5000); // 5 seconds delay
     }
   };
 
-  console.log(window.innerWidth);
-
   return (
     <>
-      <div className="bars" style={expanded ? { left: '60%' } : { left: '5%' }} onClick={() => setExpaned(!expanded)}>
+      <div 
+        className="bars" 
+        style={{ left: expanded ? '60%' : '5%' }} 
+        onClick={() => setExpanded(!expanded)}
+      >
         <UilBars />
       </div>
-      <motion.div className='sidebar'
+      <motion.div 
+        className='sidebar'
         variants={sidebarVariants}
         animate={window.innerWidth <= 768 ? `${expanded}` : ''}
       >
@@ -50,20 +49,22 @@ const Sidebar = () => {
         </div>
 
         <div className="menu">
-          {SidebarData.map((item, index) => {
-            return (
-              <NavLink to={`/${item.heading.toLowerCase()}`} className="menuItem" key={index} activeClassName="active" onClick={() => setSelected(index)}>
-                <item.icon />
-                <span>{item.heading}</span>
-              </NavLink>
-            );
-          })}
+          {SidebarData.map((item, index) => (
+            <NavLink
+              to={`/${item.heading.toLowerCase()}`}
+              className={({ isActive }) => isActive ? 'menuItem active' : 'menuItem'}
+              key={index}
+              onClick={() => setSelected(index)}
+            >
+              <item.icon />
+              <span>{item.heading}</span>
+            </NavLink>
+          ))}
+
           {/* signoutIcon */}
-          <div className="menuItem">
-            <a onClick={handleSignOut}>
+          <div className="menuItem" onClick={handleSignOut}>
             <UilSignOutAlt />
-            {/* Sign Out */}
-            </a>
+            <span>Sign Out</span>
           </div>
         </div>
       </motion.div>

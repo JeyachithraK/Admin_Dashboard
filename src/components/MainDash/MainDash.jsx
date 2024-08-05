@@ -1,21 +1,20 @@
 import React from "react";
 import Cards from "../Cards/Cards";
-import Table from "../Table/Table";
+import Orders from "../Orders/Orders"; // Import the Orders component
 import "./MainDash.css";
-import Sidebar from "../Sidebar";
-import RightSide from "../RigtSide/RightSide";
+
 const MainDash = () => {
   return (
-
-    <>
-    {/* <Sidebar/> */}
     <div className="MainDash">
       <h1>Dashboard</h1>
-      <Cards />
-      <Table />
+      <div className="cards-container">
+        <Cards />
+      </div>
+      <h2>Recent Orders</h2>
+      <div className="recent-orders-container">
+        <Orders showControls={false} /> {/* Pass prop to hide controls */}
+      </div>
     </div>
-    {/* <RightSide/> */}
-    </>
   );
 };
 

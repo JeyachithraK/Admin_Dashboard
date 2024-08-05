@@ -1,20 +1,47 @@
-.MainDash{
-    /* padding-top: 1rem; */
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
+.MainDash {
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: filter 0.3s ease;
+  margin-top: 29px;
+  margin-bottom: 23px;
+  display: flex;
+  flex-direction: column;
 }
-
-@media screen and (max-width: 1200px) {
-    .MainDash{
-        justify-content:flex-start;
-        margin-top: 2rem;
-    }
+.MainDash h1 {
+  margin-bottom: 20px;
+  font-size: 2em;
+  color: #333;
 }
-
-@media screen and (max-width: 768px)
-{
-    .MainDash{
-        align-items: center;
-    }
+.MainDash .cards-container {
+  margin-bottom: 20px;
+}
+.MainDash h2 {
+  margin-bottom: 10px; /* Reduce the space below the heading */
+}
+.MainDash .recent-orders-container {
+  /* Adjust height as needed */
+  height: 400px; /* Set the height you need */
+  overflow-y: auto; /* Enable vertical scrolling if content overflows */
+  margin-bottom: 0; /* Remove bottom margin */
+  padding-bottom: 0; /* Remove bottom padding */
+}
+.MainDash .updates-section {
+  margin-bottom: 20px;
+  padding: 10px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.MainDash .customer-reviews-section {
+  padding: 10px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+/* Ensure sections do not overflow and are scrollable if needed */
+.MainDash {
+  overflow-y: auto;
+  max-height: calc(100vh - 60px); /* Adjust height to fit your layout */
 }

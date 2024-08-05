@@ -76,7 +76,13 @@ const Login = () => {
             <button type="submit">Login</button><br />
             <div className="additional-options">
               <div>
-                <p className="acc">Don't have an account? <a onClick={() => navigate('/signup')}>SignUp here</a></p>
+                <p className="acc">Don't have an account? 
+                  <button 
+                    onClick={() => navigate('/signup')} 
+                    className="link-button">
+                    SignUp here
+                  </button>
+                </p>
               </div>
             </div>
           </form>

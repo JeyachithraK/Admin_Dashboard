@@ -3,6 +3,13 @@
   background-color: #f9f9f9;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: filter 0.3s ease;
+  height: 590px; /* Set a fixed height for the container */
+  overflow-y: auto; /* Enable vertical scrolling */
+  margin-top: 29px;
+  margin-bottom: 23px;
+  /* width: 940px;*/
+  margin-left: 15px; 
 }
 
 .orders-container h2, .orders-container h3 {
@@ -11,16 +18,22 @@
   color: #333;
 }
 
+.orders-table-container {
+  max-height: 500px; /* Set a maximum height for the table container */
+  overflow-y: auto; /* Enable vertical scrolling within the table container */
+}
+
 .orders-table {
   width: 100%;
   border-collapse: collapse;
-  margin-bottom: 20px;
+  font-size: 12px; /* Reduce font size */
 }
 
 .orders-table th, .orders-table td {
-  padding: 12px;
+  padding: 8px; /* Reduce padding */
   text-align: left;
   border-bottom: 1px solid #ddd;
+  margin-top: 7px;
 }
 
 .orders-table th {
@@ -34,12 +47,13 @@
 
 .orders-table input {
   width: 100%;
-  padding: 8px;
+  padding: 6px; /* Reduce padding */
   box-sizing: border-box;
+ 
 }
 
 .orders-container button {
-  padding: 10px 20px;
+  padding: 8px 16px; /* Reduce padding */
   background-color: #4caf50;
   color: white;
   border: none;
@@ -51,15 +65,63 @@
   background-color: #45a049;
 }
 
-.orders-container input[type="text"], .orders-container input[type="email"],.orders-container input[type="date"] {
-  width: calc(100% - 24px);
-  padding: 10px;
+.orders-container input[type="text"], .orders-container input[type="date"] {
+  width: calc(100% - 16px);
+  padding: 8px; /* Reduce padding */
   margin: 5px 0;
   box-sizing: border-box;
   border: 1px solid #ccc;
   border-radius: 4px;
 }
+.orders-table th {
+  padding: 12px;
+  margin-top: 5px;
+  border-radius: 3px;
+}
+.orders-container input[type="text"]:focus, .orders-container input[type="date"]:focus {
+  border: 1px solid #4caf4f9f;
+}
 
-.orders-container input[type="text"]:focus, .orders-container input[type="email"]:focus {
-  border: 1px solid #4caf50;
+.pie-chart-link {
+  margin-top: 20px;
+}
+
+.pie-chart-link a {
+  color: #4caf4fa8;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.pie-chart-link a:hover {
+  color: #45a049d0;
+}
+
+/* Status-specific styles */
+.status {
+  display: inline-block; /* Use inline-block to adjust padding and width */
+  padding: 2px 6px; /* Adjust padding to decrease width */
+  border-radius: 4px; /* Optional: Add border-radius for better visuals */
+  
+  min-width: 80px; /* Optional: Set a minimum width */
+  text-align: center; /* Center align text */
+}
+
+.status.pending {
+  background-color: rgba(255, 206, 86, 0.2); /* Yellow */
+  color: rgba(255, 206, 86, 1);
+}
+
+.status.in-progress {
+  background-color: rgba(54, 162, 235, 0.2); /* Blue */
+  color: rgba(54, 162, 235, 1);
+}
+
+.status.completed {
+  background-color: rgba(75, 192, 192, 0.2); /* Green */
+  color: rgba(75, 192, 192, 1);
+}
+
+.status.cancelled {
+  background-color: rgba(255, 99, 132, 0.2); /* Red */
+  color: rgba(255, 99, 132, 1);
 }
