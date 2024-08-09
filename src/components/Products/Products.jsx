@@ -3,6 +3,7 @@ import axios from 'axios';
 import './Products.css';
 import ProductPieChartModal from './ProductPieChartModal';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
+import { FaChartPie, FaChartLine, FaChartBar, FaChartArea } from 'react-icons/fa';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -103,36 +104,13 @@ const Products = () => {
           'rgba(153, 102, 255, 1)',
           'rgba(255, 159, 64, 1)'
         ],
-        borderWidth: 1,
+        borderWidth: 3,
       },
     ],
   };
 
   return (
     <div className="products-container">
-      <h2>Products</h2>
-      <table className="products-table">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Price</th>
-            <th>Description</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {products.map(product => (
-            <tr key={product.id}>
-              <td>{product.name}</td>
-              <td>{product.price}</td>
-              <td>{product.description}</td>
-              <td>
-                <button onClick={() => handleDeleteProduct(product.id)}>Delete</button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
       <h3>Add New Product</h3>
       <div className="add-product-section">
         <input
@@ -158,12 +136,41 @@ const Products = () => {
         />
         <button onClick={handleAddProduct}>Add Product</button>
       </div>
-      <div className="pie-chart-link" style={{ marginTop: '20px' }}>
+      <h2>Products</h2>
+      <table className="products-table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Description</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {products.map(product => (
+            <tr key={product.id}>
+              <td>{product.name}</td>
+              <td>{product.price}</td>
+              <td>{product.description}</td>
+              <td>
+                <button onClick={() => handleDeleteProduct(product.id)}>Delete</button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      <div className="box-above-link">
+        <FaChartPie size={24} />
         <a href="#" onClick={toggleChart}>
-          Wanna see pie-chart?
+          {/* Wanna see pie-chart? */}
+          <div class="pie-chart-icon-container">
+    <i class="fas fa-chart-pie pie-chart-icon"></i>
+    </div>
         </a>
+        <FaChartLine size={24} />
+        <FaChartBar size={24} />
+        <FaChartArea size={24} />
       </div>
-
       <ProductPieChartModal
         show={showChart}
         onClose={toggleChart}

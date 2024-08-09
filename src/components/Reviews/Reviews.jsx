@@ -2,13 +2,17 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './Reviews.css';
 import ReviewPieChartModal from './ReviewPieChartModal';
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
-
-ChartJS.register(ArcElement, Tooltip, Legend);
+import LineChartComponent from './LineChart';
+import BarChartComponent from './BarChartComponent'; // Import the BarChart component
+import { CircularProgressbar } from 'react-circular-progressbar';
+import 'react-circular-progressbar/dist/styles.css';
+import { motion } from 'framer-motion';
 
 const Reviews = () => {
   const [reviews, setReviews] = useState([]);
   const [showChart, setShowChart] = useState(false);
+  const [showLineChart, setShowLineChart] = useState(false);
+  const [showBarChart, setShowBarChart] = useState(false); // State to toggle bar chart
   const [newReview, setNewReview] = useState({ reviewer: '', comment: '', rating: '' });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -25,7 +29,7 @@ const Reviews = () => {
       setReviews(response.data);
     } catch (err) {
       setError('Failed to fetch reviews. Please try again later.');
-      console.error("Error fetching reviews", err);
+      console.error('Error fetching reviews', err);
     } finally {
       setLoading(false);
     }
@@ -33,9 +37,9 @@ const Reviews = () => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setNewReview(prevReview => ({
+    setNewReview((prevReview) => ({
       ...prevReview,
-      [name]: value
+      [name]: value,
     }));
   };
 
@@ -57,7 +61,7 @@ const Reviews = () => {
       setNewReview({ reviewer: '', comment: '', rating: '' });
     } catch (err) {
       setError('Failed to add review. Please try again later.');
-      console.error("Error adding review", err);
+      console.error('Error adding review', err);
     }
   };
 
@@ -69,13 +73,21 @@ const Reviews = () => {
         fetchReviews();
       } catch (err) {
         setError('Failed to delete review. Please try again later.');
-        console.error("Error deleting review", err);
+        console.error('Error deleting review', err);
       }
     }
   };
 
   const toggleChart = () => {
     setShowChart(!showChart);
+  };
+
+  const toggleLineChart = () => {
+    setShowLineChart(!showLineChart);
+  };
+
+  const toggleBarChart = () => {
+    setShowBarChart(!showBarChart);
   };
 
   const ratingCounts = reviews.reduce((acc, review) => {
@@ -85,67 +97,64 @@ const Reviews = () => {
   }, {});
 
   const chartData = {
-    labels: Object.keys(ratingCounts).map(r => `Rating ${r}`),
-    datasets: [
-      // {
-      //   data: Object.values(ratingCounts),
-      //   backgroundColor: ['rgba(75, 192, 192, 0.2)', 'rgba(255, 99, 132, 0.2)', 'rgba(255, 206, 86, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(153, 102, 255, 0.2)'],
-      //   borderColor: ['rgba(75, 192, 192, 1)', 'rgba(255, 99, 132, 1)', 'rgba(255, 206, 86, 1)', 'rgba(54, 162, 235, 1)', 'rgba(153, 102, 255, 1)'],
-      //   borderWidth: 1
-      // }
+    series: Object.values(ratingCounts),
+    labels: Object.keys(ratingCounts).map((r) => `Rating ${r}`),
+  };
+
+  const chartOptions = {
+    chart: {
+      type: 'pie',
+    },
+    labels: Object.keys(ratingCounts).map((r) => `Rating ${r}`),
+    responsive: [
       {
-        data: Object.values(ratingCounts),
-        backgroundColor: [
-          'rgba(75, 192, 192, 0.5)',  // Brighter Cyan
-          'rgba(255, 99, 132, 0.5)',  // Brighter Red
-          'rgba(255, 254, 0)',  // Brighter Yellow
-          'rgba(54, 162, 235, 0.5)',  // Brighter Blue
-          'rgba(153, 102, 255, 0.5)'  // Brighter Purple
-        ],
-        borderColor: [
-          'rgba(75, 192, 192, 1)',  // Vivid Cyan
-          'rgba(255, 99, 132, 1)',  // Vivid Red
-          'rgba(255, 206, 86, 1)',  // Vivid Yellow
-          'rgba(54, 162, 235, 1)',  // Vivid Blue
-          'rgba(153, 102, 255, 1)'  // Vivid Purple
-        ],
-        borderWidth: 2  // Increased border width for more vivid effect
-      }
-      
-    ]
+        breakpoint: 480,
+        options: {
+          chart: {
+            width: 200,
+          },
+          legend: {
+            position: 'bottom',
+          },
+        },
+      },
+    ],
   };
 
   return (
     <div className="reviews-container">
-     <h3>Add New Review</h3>
-          <input
-            type="text"
-            name="reviewer"
-            value={newReview.reviewer}
-            onChange={handleInputChange}
-            placeholder="Reviewer"
-            aria-label="Reviewer"
-          />
-          <input
-            type="text"
-            name="comment"
-            value={newReview.comment}
-            onChange={handleInputChange}
-            placeholder="Comment"
-            aria-label="Comment"
-          />
-          <input
-            type="number"
-            name="rating"
-            value={newReview.rating}
-            onChange={handleInputChange}
-            placeholder="Rating"
-            min="1"
-            max="5"
-            aria-label="Rating"
-          />
-          <button className="but" onClick={handleAddReview}>Add Review</button>
-      <h2>Reviews</h2>
+      <h3>Add New Review</h3>
+      <input
+        type="text"
+        name="reviewer"
+        value={newReview.reviewer}
+        onChange={handleInputChange}
+        placeholder="Reviewer"
+        aria-label="Reviewer"
+      />
+      <input
+        type="text"
+        name="comment"
+        value={newReview.comment}
+        onChange={handleInputChange}
+        placeholder="Comment"
+        aria-label="Comment"
+      />
+      <input
+        type="number"
+        name="rating"
+        value={newReview.rating}
+        onChange={handleInputChange}
+        placeholder="Rating"
+        min="1"
+        max="5"
+        aria-label="Rating"
+      />
+      <button className="but" onClick={handleAddReview}>
+        Add Review
+      </button>
+
+      <h3>Reviews</h3>
       {loading && <p>Loading...</p>}
       {error && <p className="error-message">{error}</p>}
       {!loading && (
@@ -160,7 +169,7 @@ const Reviews = () => {
               </tr>
             </thead>
             <tbody>
-              {reviews.map(review => (
+              {reviews.map((review) => (
                 <tr key={review.id}>
                   <td>{review.reviewer}</td>
                   <td>{review.comment}</td>
@@ -172,16 +181,42 @@ const Reviews = () => {
               ))}
             </tbody>
           </table>
-         
-          <div className="pie-chart-link">
-            <a href="#" onClick={toggleChart}>
-              Wanna see pie-chart?
-            </a>
+
+          <div className="chart-info">
+            <span>Ratings Distribution</span>
+            <span onClick={toggleLineChart} className="chart-toggle">
+              {showLineChart ? 'Hide line chart' : 'Click to view line chart'}
+            </span>
+            <span onClick={toggleBarChart} className="chart-toggle">
+              {showBarChart ? 'Hide bar chart' : 'Click to view bar chart'}
+            </span>
           </div>
+
+          {showLineChart && <LineChartComponent data={reviews} />}
+          {showBarChart && <BarChartComponent data={reviews} />}
+
+          <motion.div
+            className="chart-card"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.8 }}
+            transition={{ duration: 0.3 }}
+            onClick={toggleChart}
+          >
+            <div className="chart-container">
+              <CircularProgressbar value={70} text={`${70}%`} />
+            </div>
+            <div className="chart-info">
+              <span>Ratings Distribution</span>
+              <span>Click to view pie chart</span>
+            </div>
+          </motion.div>
+
           <ReviewPieChartModal
             show={showChart}
             onClose={toggleChart}
             chartData={chartData}
+            chartOptions={chartOptions}
           />
         </>
       )}

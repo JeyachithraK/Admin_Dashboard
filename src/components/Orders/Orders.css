@@ -8,8 +8,8 @@
   overflow-y: auto; /* Enable vertical scrolling */
   margin-top: 29px;
   margin-bottom: 23px;
-  /* width: 940px;*/
   margin-left: 15px; 
+  position: relative; /* Added position relative for absolute positioning of inner elements */
 }
 
 .orders-container h2, .orders-container h3 {
@@ -49,7 +49,6 @@
   width: 100%;
   padding: 6px; /* Reduce padding */
   box-sizing: border-box;
- 
 }
 
 .orders-container button {
@@ -73,11 +72,13 @@
   border: 1px solid #ccc;
   border-radius: 4px;
 }
+
 .orders-table th {
   padding: 12px;
   margin-top: 5px;
   border-radius: 3px;
 }
+
 .orders-container input[type="text"]:focus, .orders-container input[type="date"]:focus {
   border: 1px solid #4caf4f9f;
 }
@@ -101,7 +102,6 @@
   display: inline-block; /* Use inline-block to adjust padding and width */
   padding: 2px 6px; /* Adjust padding to decrease width */
   border-radius: 4px; /* Optional: Add border-radius for better visuals */
-  
   min-width: 80px; /* Optional: Set a minimum width */
   text-align: center; /* Center align text */
 }
@@ -124,4 +124,103 @@
 .status.cancelled {
   background-color: rgba(255, 99, 132, 0.2); /* Red */
   color: rgba(255, 99, 132, 1);
+}
+
+.box-above-link {
+  width: 300px;
+  display: flex;
+  flex-direction: column; /* Arrange items in a column */
+  align-items: center; /* Center items horizontally */
+  justify-content: center; /* Center items vertically */
+  margin-top: 20px; /* Adjust top margin */
+  height: 110px;
+  
+}
+.box-above-link:hover{
+  transform: scale(1.0);
+  box-shadow: 0 30px 60px rgba(240, 238, 238, 0.684);
+
+}
+
+.box-above-link a {
+  display: block; /* Display the link as a block element to adjust spacing */
+  text-align: center;
+  margin-top: 10px; /* Adjust margin to space out the link from icons */
+}
+
+.mm {
+  display: flex;
+  gap: 20px; /* Adjust gap between items */
+  margin-top: 20px; /* Adjust top margin */
+  justify-content: center; /* Center items horizontally */
+}
+
+.line-chart-container {
+  margin: 20px auto; /* Center the container and add margin */
+  max-width: 800px; /* Set maximum width */
+  padding: 20px; /* Add padding for better appearance */
+  border: 1px solid #ddd; /* Optional: Add border for better visual separation */
+  border-radius: 8px; /* Optional: Add border-radius for rounded corners */
+  background-color: #fff; /* Optional: Set background color */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4); /* Optional: Add box shadow for depth */
+}
+.pie-chart-icon-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100px; /* Adjust the size as needed */
+  height: 100px; /* Adjust the size as needed */
+  background-color: rgba(173, 216, 230, 1); /* Light Blue Background */
+  border-radius: 50%; /* Make it circular */
+  box-shadow: 0 20px 40px rgba(240, 238, 238, 0.484);
+  cursor: pointer; /* Change cursor to pointer to indicate it's clickable */
+  margin: 20px;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.pie-chart-icon {
+  font-size: 48px; /* Adjust the size of the icon */
+  color: white; /* Color of the icon */
+}
+.pie-chart-icon-container:hover {
+  transform: scale(1.1); /* Slightly increase the size */
+  box-shadow: 0 30px 60px rgba(240, 238, 238, 0.684); /* Increase the shadow size and intensity */
+}
+
+.pie-chart-icon-container:hover .pie-chart-icon {
+  color: #ff0000; /* Change icon color on hover */
+}
+.icon-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100px; /* Adjust the size as needed */
+  height: 100px; /* Adjust the size as needed */
+  background-color: rgba(173, 216, 230, 1); /* Light Blue Background */
+  border-radius: 50%; /* Make it circular */
+  box-shadow: 0 20px 40px rgba(240, 238, 238, 0.484);
+  cursor: pointer; /* Change cursor to pointer to indicate it's clickable */
+  margin: 20px; /* Add some margin */
+  transition: transform 0.3s, box-shadow 0.3s; /* Smooth transition for transform and shadow */
+}
+
+.icon-container:hover {
+  transform: scale(1.1); /* Slightly increase the size */
+  box-shadow: 0 30px 60px rgba(240, 238, 238, 0.684); /* Increase the shadow size and intensity */
+}
+
+.pie-chart-icon, .graph-icon {
+  font-size: 48px; /* Adjust the size of the icon */
+  color: white; /* Color of the icon */
+}
+
+.icon-container:hover .pie-chart-icon, .icon-container:hover .graph-icon {
+  color: #ff0000; /* Change icon color on hover */
+}
+.order-distribution {
+  color: #ffffff; /* Choose your desired color */
+  font-weight: bold; /* Optional: Make the text bold */
+  font-size: 16px; /* Optional: Adjust the font size */
+  margin-bottom: 0px; /* Optional: Adjust the margin for spacing */
+  margin-top: 7px;
 }

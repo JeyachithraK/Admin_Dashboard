@@ -31,7 +31,7 @@
 }
 
 .products-table th, .products-table td {
-  padding: 8px; /* Match padding */
+  padding: 11px; /* Match padding */
   text-align: left;
   border-bottom: 1px solid #ddd;
 }
@@ -52,6 +52,7 @@
   box-sizing: border-box;
 }
 
+/* Button styling within the products section */
 .products-container button {
   padding: 8px 16px; /* Match padding */
   background-color: #4caf50;
@@ -95,3 +96,86 @@
 .pie-chart-link a:hover {
   color: #45a049; /* Darker shade for hover effect */
 }
+
+/* Box styling for the link with icons */
+.box-above-link {
+  padding: 35px;
+  background: linear-gradient(to right, #4caf50, #81c784); /* Light green gradient */
+  border-radius: 5px;
+  margin-bottom: 20px;
+  margin-top: 7px;
+  text-align: center;
+  position: relative;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3); /* Blooming effect */
+}
+
+/* Icon styling inside the box */
+.box-above-link svg {
+  position: absolute;
+  color: #fff;
+  opacity: 0.7;
+}
+
+.box-above-link svg:nth-of-type(1) {
+  top: 10px;
+  left: 10px;
+}
+
+.box-above-link svg:nth-of-type(2) {
+  top: 10px;
+  right: 10px;
+}
+
+.box-above-link svg:nth-of-type(3) {
+  bottom: 10px;
+  left: 10px;
+}
+
+.box-above-link svg:nth-of-type(4) {
+  bottom: 10px;
+  right: 10px;
+}
+
+.box-above-link a {
+  text-decoration: none;
+  color: #fff;
+  font-weight: bold;
+  font-size: 1.2em;
+}
+
+.box-above-link a:hover {
+  text-decoration: underline;
+}
+.box-above-link .icon {
+  font-size: 5em; /* Adjust the size as needed */
+  color: #fff;
+  opacity: 0.8;
+  position: absolute;
+}
+ 
+.pie-chart-icon-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100px; /* Adjust the size as needed */
+  height: 100px; /* Adjust the size as needed */
+  background-color: rgba(173, 216, 230, 1); /* Light Blue Background */
+  border-radius: 50%; /* Make it circular */
+  box-shadow: 0 4px 6px rgba(240, 238, 238, 0.484);
+  cursor: pointer; /* Change cursor to pointer to indicate it's clickable */
+}
+
+.pie-chart-icon {
+  font-size: 48px; /* Adjust the size of the icon */
+  color: white; /* Color of the icon */
+}
+
+.pie-chart-icon-container:hover .pie-chart-icon {
+  color: #ff0000; /* Change icon color on hover */
+}
+/* .box-above-link{
+      justify-content: center;
+      align-items: center;
+      margin-left: 300px;
+      margin-top: 23px;
+} */

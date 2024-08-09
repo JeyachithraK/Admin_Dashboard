@@ -1,12 +1,12 @@
+/* Reviews.css */
+
 .reviews-container {
   padding: 20px;
   background-color: #f9f9f9;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  margin-top: 29px;
-  margin-bottom: 23px;
-  margin-left: 15px;
-  height: 540px;
+  margin: 29px 15px 23px 15px;
+  height: 590px;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
@@ -31,13 +31,14 @@
 }
 
 .reviews-table th, .reviews-table td {
-  padding: 12px;
+  padding: 9px;
   border: 1px solid #ddd;
   text-align: left;
 }
 
 .reviews-table th {
-  background-color: #f2f2f2;
+  background: var(--yellow);
+  font-weight: bold;
 }
 
 .reviews-table tbody tr:nth-child(even) {
@@ -78,23 +79,104 @@
   cursor: pointer;
   box-sizing: border-box;
 }
-.but{
+
+.but {
   width: 140px;
 }
+
 .reviews-container button:hover {
   background-color: #45a049;
 }
 
-.pie-chart-link {
+.chart-card {
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
   margin-top: 20px;
 }
 
-.pie-chart-link a {
-  color: #4caf4fa8;
-  text-decoration: underline;
-  cursor: pointer;
+.chart-container {
+  width: 50px;
+  height: 50px;
 }
 
-.pie-chart-link a:hover {
-  color: #45a049d0;
+.chart-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.chart-info span:first-child {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.chart-info span:last-child {
+  color: #007bff;
+  font-size: 14px;
+}
+
+.chart-info span:last-child:hover {
+  text-decoration: underline;
+}
+
+.line-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.line-info span:first-child {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.line-info span:last-child {
+  color: #007bff;
+  font-size: 14px;
+}
+
+.line-info span:last-child:hover {
+  text-decoration: underline;
+}
+
+.error-message {
+  color: red;
+  margin-top: 10px;
+}
+
+/* Chart Modal Styles */
+.chart-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.chart-content {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 600px;
+  width: 90%;
+  position: relative;
+}
+
+.chart-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
 }

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './Customers.css';
 import CustomerPieChartModal from './CustomerPieChartModal';
+import { FaChartPie, FaChartLine, FaChartBar, FaChartArea } from 'react-icons/fa'; // Import icons from react-icons
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
@@ -42,7 +43,7 @@ const Customers = () => {
   const handleDeleteCustomer = async (id) => {
     try {
       await axios.delete(`http://localhost:8080/api/customers/${id}`);
-      fetchCustomers();
+      fetchCustomers(); // Refresh the list after deletion
     } catch (error) {
       console.error('Error deleting customer:', error);
     }
@@ -63,13 +64,31 @@ const Customers = () => {
     datasets: [
       {
         data: Object.values(statusCounts),
-        backgroundColor: ['rgba(75, 192, 192, 0.2)', 'rgba(255, 99, 132, 0.2)'],
-        borderColor: ['rgba(75, 192, 192, 1)', 'rgba(255, 99, 132, 1)'],
-        borderWidth: 1
+        backgroundColor: ['rgba(75, 192, 192, 0.2)','rgba(255, 206, 86, 0.2)' ],
+        borderColor: ['rgba(75, 192, 192, 1)',  'rgba(255, 206, 86, 1)'],
+        borderWidth: 3
+        
       }
     ]
   };
-
+//  backgroundColor: [
+//   'rgba(75, 192, 192, 0.2)', 
+//   'rgba(255, 99, 132, 0.2)',
+//   'rgba(255, 206, 86, 0.2)',
+//   'rgba(54, 162, 235, 0.2)',
+//   'rgba(153, 102, 255, 0.2)',
+//   'rgba(255, 159, 64, 0.2)'
+// ],
+// borderColor: [
+//   'rgba(75, 192, 192, 1)', 
+//   'rgba(255, 99, 132, 1)',
+//   'rgba(255, 206, 86, 1)',
+//   'rgba(54, 162, 235, 1)',
+//   'rgba(153, 102, 255, 1)',
+//   'rgba(255, 159, 64, 1)'
+// ],
+// borderWidth: 3,
+// },
   return (
     <div className="customers-container">
       <div className="add-customer-section">
@@ -81,10 +100,8 @@ const Customers = () => {
           <option value="Active">Active</option>
           <option value="Inactive">Inactive</option>
         </select>
-        <br></br>
-        <div>
-          <button onClick={handleAddCustomer}>Add Customer</button>
-        </div>
+        <br />
+        <button onClick={handleAddCustomer}>Add Customer</button>
       </div>
 
       <div className="customers-table-container">
@@ -114,13 +131,32 @@ const Customers = () => {
           </tbody>
         </table>
       </div>
+      <div className='mm'>
+            <div className="box-above-link">
+              <FaChartPie size={24} />
+              <a href="#" onClick={toggleChart}>
+                {/* Wanna see pie-chart? */}
+                <div class="pie-chart-icon-container">
+                 <i class="fas fa-chart-pie pie-chart-icon"></i>
+                </div>
+              </a>
+              <FaChartLine size={24} />
+              <FaChartBar size={24} />
+              <FaChartArea size={24} />
+            </div>
+            <div className="box-above-link">
+                   <FaChartPie size={24} />
+                  <FaChartLine size={24} />
+                     <a href="#" >
+                        <div className="icon-container">
+                <i className="fas fa-chart-line graph-icon"></i>
+            </div>
+          </a>
+        <FaChartBar size={24} />
+        <FaChartArea size={24} />
 
-      <div className="pie-chart-link">
-        <a href="#" onClick={toggleChart}>
-          Wanna see pie-chart?
-        </a>
       </div>
-
+      </div>
       <CustomerPieChartModal
         show={showChart}
         onClose={toggleChart}
