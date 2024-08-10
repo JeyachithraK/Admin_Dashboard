@@ -7,6 +7,8 @@ import BarChartComponent from './BarChartComponent'; // Import the BarChart comp
 import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import { motion } from 'framer-motion';
+import { FaChartPie, FaChartLine, FaChartBar, FaChartArea } from 'react-icons/fa';
+
 
 const Reviews = () => {
   const [reviews, setReviews] = useState([]);
@@ -182,20 +184,71 @@ const Reviews = () => {
             </tbody>
           </table>
 
-          <div className="chart-info">
+        <div className="chart-info">
             <span>Ratings Distribution</span>
-            <span onClick={toggleLineChart} className="chart-toggle">
-              {showLineChart ? 'Hide line chart' : 'Click to view line chart'}
-            </span>
-            <span onClick={toggleBarChart} className="chart-toggle">
-              {showBarChart ? 'Hide bar chart' : 'Click to view bar chart'}
-            </span>
-          </div>
+            
+              <div className='mm'>
+                   <div className="box-above-link">
+                       <FaChartPie size={24} />
+                       {/* <span className="order-distribution">Review-Distribution</span> */}
+                       <span onClick={toggleLineChart} className="chart-toggle">
+                         {showLineChart ? 'Hide line chart' : 'Click to view line chart'}
+                        <div className="pie-chart-icon-container">
+                         <i className="fas fa-chart-pie pie-chart-icon"></i>
+                        </div>
+                      </span>
+                      <FaChartLine size={24} />
+                      <FaChartBar size={24} />
+                      <FaChartArea size={24} />
+                  </div>
+                  <div className="box-above-link">
+                     <FaChartPie size={24} />
+                     <FaChartLine size={24} />
+                     {/* <span className="order-distribution">Line-Order-Distribution</span> */}
+                     <span onClick={toggleBarChart} className="chart-toggle">
+                        {showBarChart ? 'Hide bar chart' : 'Click to view bar chart'}
+                        <div className="icon-container">
+                          {/* <i className="fas fa-chart-line line-chart-icon"></i> */}
+                          <i className="fas fa-chart-bar bar-chart-icon"></i>
+                        </div>
+                     </span>
+                     <FaChartBar size={24} />
+                     <FaChartArea size={24} />
+                  </div>
+
+                      <motion.div
+                        className="chart-card"
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0, scale: 0.8 }}
+                        transition={{ duration: 0.3 }}
+                        onClick={toggleChart}
+                        >            
+                        <div className="chart-container">
+                          <CircularProgressbar value={70} text={`${70}%`} />
+                        </div>
+
+                        <div className="box-above-link">
+                              <FaChartPie size={24} />
+                              <FaChartLine size={24} />
+                              {/* <span>Ratings Distribution</span> */}
+                              <span>Click to view pie chart
+                                <div className="icon-container">
+                                    <i className="fas fa-chart-line line-chart-icon"></i>
+                                </div>
+                              </span>
+                          
+                             <FaChartBar size={24} />
+                             <FaChartArea size={24} />
+                         </div>
+                     </motion.div>
+                 </div>
+        </div>
 
           {showLineChart && <LineChartComponent data={reviews} />}
           {showBarChart && <BarChartComponent data={reviews} />}
 
-          <motion.div
+          {/* <motion.div
             className="chart-card"
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -206,11 +259,22 @@ const Reviews = () => {
             <div className="chart-container">
               <CircularProgressbar value={70} text={`${70}%`} />
             </div>
-            <div className="chart-info">
-              <span>Ratings Distribution</span>
-              <span>Click to view pie chart</span>
-            </div>
-          </motion.div>
+            <div className="box-above-link">
+                  <FaChartPie size={24} />
+                  <FaChartLine size={24} />
+                  
+              
+                  {/* <span>Ratings Distribution</span> */}
+                  {/* <span>Click to view pie chart
+                    <div className="icon-container">
+                        <i className="fas fa-chart-line line-chart-icon"></i>
+                    </div>
+                  </span>
+              
+                 <FaChartBar size={24} />
+                 <FaChartArea size={24} />
+             </div> */}
+          {/* </motion.div>  */}
 
           <ReviewPieChartModal
             show={showChart}

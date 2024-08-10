@@ -64,7 +64,7 @@
   background-color: #45a049;
 }
 
-.orders-container input[type="text"], .orders-container input[type="date"] {
+.orders-container input[type="text"], .orders-container input[type="date"], .orders-container input[type="number"] {
   width: calc(100% - 16px);
   padding: 8px; /* Reduce padding */
   margin: 5px 0;
@@ -127,7 +127,7 @@
 }
 
 .box-above-link {
-  width: 300px;
+  width: 200px;
   display: flex;
   flex-direction: column; /* Arrange items in a column */
   align-items: center; /* Center items horizontally */
@@ -160,7 +160,7 @@
   max-width: 800px; /* Set maximum width */
   padding: 20px; /* Add padding for better appearance */
   border: 1px solid #ddd; /* Optional: Add border for better visual separation */
-  border-radius: 8px; /* Optional: Add border-radius for rounded corners */
+  border-radius: 10px; /* Optional: Add border-radius for rounded corners */
   background-color: #fff; /* Optional: Set background color */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4); /* Optional: Add box shadow for depth */
 }
@@ -209,12 +209,18 @@
   box-shadow: 0 30px 60px rgba(240, 238, 238, 0.684); /* Increase the shadow size and intensity */
 }
 
-.pie-chart-icon, .graph-icon {
+.pie-chart-icon, .line-chart-icon {
   font-size: 48px; /* Adjust the size of the icon */
   color: white; /* Color of the icon */
 }
-
-.icon-container:hover .pie-chart-icon, .icon-container:hover .graph-icon {
+.line-chart-icon{
+  font-size: 38px;
+}
+.bar-chart-icon{
+  font-size: 38px; /* Adjust the size of the icon */
+  color: white; /* Color of the icon */
+}
+.icon-container:hover .pie-chart-icon, .icon-container:hover .line-chart-icon ,.icon-container:hover .bar-chart-icon{
   color: #ff0000; /* Change icon color on hover */
 }
 .order-distribution {

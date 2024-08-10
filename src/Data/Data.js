@@ -18,6 +18,15 @@ import img1 from "../imgs/img1.png";
 import img2 from "../imgs/img2.png";
 import img3 from "../imgs/img3.png";
 
+// import { UseOrdersData } from "../components/Orders/Orders";
+
+// let revenue=0;
+// let revenueSeries=[];
+// const init = () =>{
+
+//   const { revenue, revenueSeries } = UseOrdersData();
+// }
+// init();
 // Sidebar Data
 export const SidebarData = [
   {
@@ -52,17 +61,17 @@ export const cardsData = [
       boxShadow: "0px 10px 20px 0px #e0c6f5",
     },
     barValue: 70,
-    value: "25,970",
+    value:"14,270",
     png: UilUsdSquare,
     series: [
       {
         name: "Revenue",
-        data: [31, 40, 28, 51, 42, 109, 100],
+        data:[10, 100, 50, 70, 80, 30, 40],
       },
     ],
   },
   {
-    title: "Profit",
+    title: "Loss",
     color: {
       backGround: "linear-gradient(180deg, #FF919D 0%, #FC929D 100%)",
       boxShadow: "0px 10px 20px 0px #FDC0C7",
@@ -72,7 +81,7 @@ export const cardsData = [
     png: UilMoneyWithdrawal,
     series: [
       {
-        name: "Profit",
+        name: "Loss",
         data: [10, 100, 50, 70, 80, 30, 40],
       },
     ],

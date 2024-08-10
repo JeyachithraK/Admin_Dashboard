@@ -70,13 +70,13 @@ const PieChartModal = ({ show, onClose, chartData }) => {
   return (
     <div className="modal-overlay">
       <div className="modal-content">
-        <div className="chart-controls">
+        {/* <div className="chart-controls">
           <FaSearchPlus onClick={handleZoomIn} className="chart-control-icon" />
           <FaSearchMinus onClick={handleZoomOut} className="chart-control-icon" />
           <FaHome onClick={handleResetZoom} className="chart-control-icon" />
           <FaDownload onClick={handleDownload} className="chart-control-icon" />
-          <FaTimes onClick={onClose} className="chart-control-icon close-icon" />
-        </div>
+        </div> */}
+        <FaTimes onClick={onClose} className="chart-control-icon close-icon" />
         <h3>Order Status Distribution</h3>
         <div className="pie-chart-container">
           <Pie ref={chartRef} data={chartData} options={options} width={700} height={500} />

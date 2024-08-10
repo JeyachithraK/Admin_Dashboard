@@ -7,6 +7,54 @@ import { FaChartPie, FaChartLine, FaChartBar, FaChartArea } from 'react-icons/fa
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
+
+export const UseProductsData = () => {
+  const [expenses, setExpense] = useState(0);
+  const [expensesSeries, setExpenseSeries] = useState([]);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await axios.get('http://localhost:8080/products');
+        const products = response.data;
+        console.log('Products:', products);
+
+        // Ensure that products are not null or undefined
+        if (products && Array.isArray(products)) {
+          // Calculate total expense
+          const totalExpense = products.reduce((acc, product) => {
+            if (product.price) {
+              return acc + parseFloat(product.price);
+            }
+            return acc;
+          }, 0);
+
+          // Prepare expense series data
+          const expenseSeriesData = products
+            .map(product => parseFloat(product.price))
+            .filter(price => !isNaN(price)); // Filter out NaN values
+
+          // Update state
+          setExpense(totalExpense);
+          setExpenseSeries(expenseSeriesData);
+
+          // Debugging output
+          console.log('Total Expense:', totalExpense);
+          console.log('Expense Series Data:', expenseSeriesData);
+        } else {
+          console.error('Invalid products data');
+        }
+      } catch (error) {
+        console.error('Error fetching products:', error);
+      }
+    };
+
+    fetchProducts();
+  }, []);
+
+  return { expenses, expensesSeries };
+};
+  
 const Products = () => {
   const [products, setProducts] = useState([]);
   const [showChart, setShowChart] = useState(false);
@@ -161,16 +209,29 @@ const Products = () => {
       </table>
       <div className="box-above-link">
         <FaChartPie size={24} />
+        <span className="order-distribution">Price-Distribution</span>
         <a href="#" onClick={toggleChart}>
           {/* Wanna see pie-chart? */}
           <div class="pie-chart-icon-container">
-    <i class="fas fa-chart-pie pie-chart-icon"></i>
-    </div>
+         <i class="fas fa-chart-pie pie-chart-icon"></i>
+        </div>
         </a>
         <FaChartLine size={24} />
         <FaChartBar size={24} />
         <FaChartArea size={24} />
       </div>
+      <div className="box-above-link">
+          <FaChartPie size={24} />
+          <FaChartLine size={24} />
+          <span className="order-distribution">Line-Order-Distribution</span>
+          <a href="#" >
+            <div className="icon-container">
+              <i className="fas fa-chart-line line-chart-icon"></i>
+            </div>
+          </a>
+          <FaChartBar size={24} />
+          <FaChartArea size={24} />
+        </div>
       <ProductPieChartModal
         show={showChart}
         onClose={toggleChart}
