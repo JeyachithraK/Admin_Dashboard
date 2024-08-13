@@ -12,8 +12,7 @@
   }
   
   .modal-content {
-    background: linear-gradient(45deg, #9d50bb, #6e48aa);
-
+    background: linear-gradient(to left, #ffb88c, #de6262);
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(240, 238, 238, 0.484);
@@ -23,21 +22,27 @@
     position: relative;
     z-index: 1001;
     height: 80%;
+    align-items: center;
   }
   
   .pie-chart-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 0 auto;
-    width: 100%;
-    height: 480px;
+    width: 470px; /* Set fixed width */
+    height: 580px; /* Set fixed height */
+    overflow: hidden; /* Hide any overflow */
   }
   
+  .pie-chart-container canvas {
+    width: 460px !important; /* Ensure the canvas width is fixed */
+    height: 460px !important; /* Ensure the canvas height is fixed */
+    margin-top: -66px;
+  }
   .close-icon {
     position: absolute;
-    top: -29px;
-    right: -13px;
+    top: -1px !important;
+    right:-73px !important;
     font-size: 18px;
     color: white;
     cursor: pointer;

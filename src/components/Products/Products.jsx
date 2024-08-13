@@ -4,6 +4,8 @@ import './Products.css';
 import ProductPieChartModal from './ProductPieChartModal';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { FaChartPie, FaChartLine, FaChartBar, FaChartArea } from 'react-icons/fa';
+import ProductLineChartModal from './ProductLineChartModal';
+
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -60,6 +62,7 @@ const Products = () => {
   const [showChart, setShowChart] = useState(false);
   const [newProduct, setNewProduct] = useState({ name: '', price: '', description: '' });
   const [error, setError] = useState('');
+  const [showLineChart, setShowLineChart] = useState(false); // Add this state
 
   useEffect(() => {
     fetchProducts();
@@ -156,10 +159,26 @@ const Products = () => {
       },
     ],
   };
+  const toggleLineChart = () => setShowLineChart(!showLineChart);
+
+  // Line chart data
+  const lineChartData = {
+    labels: products.map((product, index) => `Product ${index + 1}`),
+    datasets: [
+      {
+        label: 'Product Prices',
+        data: products.map(product => parseFloat(product.price)),
+        fill: false,
+        borderColor: 'rgba(75, 192, 192, 1)',
+        tension: 0.1,
+      },
+    ],
+  };
+
 
   return (
     <div className="products-container">
-      <h3>Add New Product</h3>
+      <h2>Add New Product</h2>
       <div className="add-product-section">
         <input
           type="text"
@@ -207,24 +226,25 @@ const Products = () => {
           ))}
         </tbody>
       </table>
-      <div className="box-above-link">
-        <FaChartPie size={24} />
-        <span className="order-distribution">Price-Distribution</span>
-        <a href="#" onClick={toggleChart}>
-          {/* Wanna see pie-chart? */}
-          <div class="pie-chart-icon-container">
-         <i class="fas fa-chart-pie pie-chart-icon"></i>
+      <div className='mm1'>
+        <div className="box-above-link">
+          <FaChartPie size={24} />
+          <span className="order-distribution">Price-Distribution</span>
+          <a href="#" onClick={toggleChart}>
+            <div className="pie-chart-icon-container">
+              <i className="fas fa-chart-pie pie-chart-icon"></i>
+            </div>
+          </a>
+          <FaChartLine size={24} />
+          <FaChartBar size={24} />
+          <FaChartArea size={24} />
         </div>
-        </a>
-        <FaChartLine size={24} />
-        <FaChartBar size={24} />
-        <FaChartArea size={24} />
-      </div>
-      <div className="box-above-link">
+        <br />
+        <div className="box-above-link">
           <FaChartPie size={24} />
           <FaChartLine size={24} />
           <span className="order-distribution">Line-Order-Distribution</span>
-          <a href="#" >
+          <a href="#" onClick={toggleLineChart}>
             <div className="icon-container">
               <i className="fas fa-chart-line line-chart-icon"></i>
             </div>
@@ -232,10 +252,18 @@ const Products = () => {
           <FaChartBar size={24} />
           <FaChartArea size={24} />
         </div>
+      </div>
+
+      {/* Modals */}
       <ProductPieChartModal
         show={showChart}
         onClose={toggleChart}
         chartData={chartData}
+      />
+      <ProductLineChartModal
+        show={showLineChart}
+        onClose={toggleLineChart}
+        chartData={lineChartData}
       />
     </div>
   );

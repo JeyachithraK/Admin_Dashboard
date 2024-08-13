@@ -52,7 +52,7 @@ const BarChartComponent = ({ data }) => {
         data: [ratingCounts['1'] || 0, ratingCounts['2'] || 0, ratingCounts['3'] || 0, ratingCounts['4'] || 0, ratingCounts['5'] || 0],
         backgroundColor: 'rgba(75, 192, 192, 0.6)',
         borderColor: 'rgba(75, 192, 192, 1)',
-        borderWidth: 1,
+        borderWidth: 5,
       },
     ],
   };

@@ -1,87 +1,72 @@
-import React, { useRef } from 'react';
-import { Pie } from 'react-chartjs-2';
-import { FaTimes, FaSearchPlus, FaSearchMinus, FaHome, FaDownload } from 'react-icons/fa';
-import Chart from 'chart.js/auto';
-import zoomPlugin from 'chartjs-plugin-zoom';
+import React from 'react';
+import ReactApexChart from 'react-apexcharts';
+import { FaTimes } from 'react-icons/fa';
+import Chart from 'react-apexcharts';
+import { motion } from "framer-motion";
+import { UilTimes } from "@iconscout/react-unicons";
 import './PieChartModal.css';
 
-// Register zoom plugin with Chart.js
-Chart.register(zoomPlugin);
-
 const PieChartModal = ({ show, onClose, chartData }) => {
-  const chartRef = useRef(null);
-
   if (!show) {
     return null;
   }
 
-  const handleZoomIn = () => {
-    const chart = chartRef.current?.chartInstance;
-    if (chart) {
-      chart.zoom(1.1);
-    }
-  };
-
-  const handleZoomOut = () => {
-    const chart = chartRef.current?.chartInstance;
-    if (chart) {
-      chart.zoom(0.9);
-    }
-  };
-
-  const handleResetZoom = () => {
-    const chart = chartRef.current?.chartInstance;
-    if (chart) {
-      chart.resetZoom();
-    }
-  };
-
-  const handleDownload = () => {
-    const chart = chartRef.current?.chartInstance;
-    if (chart) {
-      const link = document.createElement('a');
-      link.href = chart.toBase64Image();
-      link.download = 'chart.png';
-      link.click();
-    }
-  };
-
   const options = {
-    responsive: true,
-    plugins: {
-      zoom: {
-        pan: {
-          enabled: true,
-          mode: 'xy',
-        },
-        zoom: {
-          wheel: {
-            enabled: true,
-          },
-          pinch: {
-            enabled: true,
-          },
-          mode: 'xy',
-        },
+    labels: chartData.labels,
+    colors: chartData.colors,
+    chart: {
+      type: 'pie',
+      toolbar: {
+        show: true,
       },
     },
+    legend: {
+      position: 'bottom',
+      color : "white",
+    },
+    // If you want to use the `responsive` option, it should look something like this:
+    responsive: [
+      {
+        breakpoint: 1000, // Example breakpoint
+        options: {
+          chart: {
+            width: '100%', // Width for this breakpoint
+          },
+          legend: {
+            position: 'bottom', // Legend position for this breakpoint
+          },
+        },
+      },
+    ],
   };
+  
+
+  const series = chartData.series;
 
   return (
+    // <div className="modal-overlay">
+    //   <div className="modal-content">
+    //     <FaTimes onClick={onClose} className="chart-control-icon close-icon" />
+    //     <h3>Order Status Distribution</h3>
+    //     <div className="pie-chart-container" >
+    //       <ReactApexChart options={options} series={series} type="pie" width={600} />
+    //     </div>
+    //   </div>
+    // </div>
     <div className="modal-overlay">
-      <div className="modal-content">
-        {/* <div className="chart-controls">
-          <FaSearchPlus onClick={handleZoomIn} className="chart-control-icon" />
-          <FaSearchMinus onClick={handleZoomOut} className="chart-control-icon" />
-          <FaHome onClick={handleResetZoom} className="chart-control-icon" />
-          <FaDownload onClick={handleDownload} className="chart-control-icon" />
-        </div> */}
-        <FaTimes onClick={onClose} className="chart-control-icon close-icon" />
+      <motion.div
+        className="modal-content"
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        exit={{ opacity: 0, scale: 0.8 }}
+        transition={{ duration: 0.3 }}
+      >
+        <UilTimes className="close-icon" onClick={onClose} />
         <h3>Order Status Distribution</h3>
         <div className="pie-chart-container">
-          <Pie ref={chartRef} data={chartData} options={options} width={700} height={500} />
+          <Chart options={options} series={series} type="pie" width={600} />
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 };

@@ -47,7 +47,7 @@ const CustomerPieChartModal = ({ show, onClose, chartData }) => {
   };
 
   const options = {
-    responsive: true,
+    responsive: false,
     plugins: {
       zoom: {
         pan: {
@@ -71,15 +71,15 @@ const CustomerPieChartModal = ({ show, onClose, chartData }) => {
     <div className="modal-overlay">
       <div className="modal-content">
         <div className="chart-controls">
-          <FaSearchPlus onClick={handleZoomIn} className="chart-control-icon" />
+          {/* <FaSearchPlus onClick={handleZoomIn} className="chart-control-icon" />
           <FaSearchMinus onClick={handleZoomOut} className="chart-control-icon" />
-          <FaHome onClick={handleResetZoom} className="chart-control-icon" />
-          <FaDownload onClick={handleDownload} className="chart-control-icon" />
+          <FaHome onClick={handleResetZoom} className="chart-control-icon" /> */}
+          {/* <FaDownload onClick={handleDownload} className="chart-control-icon" /> */}
           <FaTimes onClick={onClose} className="chart-control-icon close-icon" />
         </div>
         <h3>Customer Status Distribution</h3>
         <div className="pie-chart-container">
-          <Pie ref={chartRef} data={chartData} options={options} width={700} height={500} />
+          <Pie ref={chartRef} data={chartData} options={options} width={470} height={510} />
         </div>
       </div>
     </div>

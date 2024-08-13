@@ -107,6 +107,7 @@
   text-align: center;
   position: relative;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.3); /* Blooming effect */
+  width: 230px;
 }
 
 /* Icon styling inside the box */
@@ -179,3 +180,10 @@
       margin-left: 300px;
       margin-top: 23px;
 } */
+ .mm1{
+  display: flex;
+  justify-content: center;
+  margin-right: 10px;
+  gap: 15px;
+  margin-top: 20px;
+ }

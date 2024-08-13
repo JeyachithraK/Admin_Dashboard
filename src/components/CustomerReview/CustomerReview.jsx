@@ -1,63 +1,75 @@
 import React from "react";
 import Chart from "react-apexcharts";
+import { useState,useEffect } from "react";
+import axios from "axios";
+import { Line } from 'react-chartjs-2';
 
 
 const CustomerReview = () => {
-  const data = {
-    series: [
+  const [data, setReviews] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+
+  useEffect(() => {
+    fetchReviews();
+  }, []);
+
+  const fetchReviews = async () => {
+    setLoading(true);
+    setError('');
+    try {
+      const response = await axios.get('http://localhost:8080/reviews');
+      setReviews(response.data);
+    } catch (err) {
+      setError('Failed to fetch reviews. Please try again later.');
+      console.error('Error fetching reviews', err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const chartData = {
+    labels: data.map(review => review.reviewer),
+    datasets: [
       {
-        name: "Review",
-        data: [10, 50, 30, 90, 40, 120, 100],
+        label: 'Rating',
+        data: data.map(review => review.rating),
+        fill: true,
+         // Set the style of the point markers
+        pointRadius: 3, 
+        backgroundColor: 'rgba(173, 216, 230, 0.5)', // Light blue with transparency
+        borderColor: 'rgb(99, 168, 242)', // A distinct blue color for the line
+        borderWidth: 3,
+        tension: 0.4,
       },
     ],
-    options: {
-      chart: {
-        type: "area",
-        height: "auto",
-      },
+  };
 
-      fill: {
-        colors: ["#fff"],
-        type: "gradient",
+  const options = {
+    responsive: true,
+    scales: {
+      x: {
+        title: {
+          display: true,
+          text: 'Reviewer'
+        }
       },
-      dataLabels: {
-        enabled: false,
-      },
-      stroke: {
-        curve: "smooth",
-        colors: ["#ff929f"],
-      },
-      tooltip: {
-        x: {
-          format: "dd/MM/yy HH:mm",
+      y: {
+        beginAtZero: true,
+        title: {
+          display: true,
+          text: 'Rating'
         },
+        ticks: {
+          min: 0,
+          max: 5,
+          stepSize: 1,
+        }
       },
-      grid: {
-        show: false,
-      },
-      xaxis: {
-        type: "datetime",
-        categories: [
-          "2018-09-19T00:00:00.000Z",
-          "2018-09-19T01:30:00.000Z",
-          "2018-09-19T02:30:00.000Z",
-          "2018-09-19T03:30:00.000Z",
-          "2018-09-19T04:30:00.000Z",
-          "2018-09-19T05:30:00.000Z",
-          "2018-09-19T06:30:00.000Z",
-        ],
-      },
-      yaxis: {
-        show: false
-      },
-      toolbar:{
-        show: false
-      }
     },
   };
-  return <div className="CustomerReview">
-        <Chart options={data.options} series={data.series} type="area" />
-  </div>;
+
+  return <Line data={chartData} options={options} />;
 };
 
 export default CustomerReview;

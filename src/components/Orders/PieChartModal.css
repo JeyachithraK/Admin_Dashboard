@@ -12,74 +12,43 @@
 }
 
 .modal-content {
-  background: linear-gradient(to right, #004d40, #00796b) !important;
+  background-color: #a92424;
   padding: 20px;
   border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(240, 238, 238, 0.484);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   text-align: center;
   width: 90%;
-  max-width: 800px;
+  max-width: 900px;
   position: relative;
   z-index: 1001;
-  height: 70%;
+  height: 80%;
 }
 
 .pie-chart-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 0 auto;
-  width: 90%;
-  height: 400px;
+  /* margin: 0 auto; */
+  /* margin-bottom: 520px; */
+  margin-left: 50px;
+  width: 100%;
+  height: 100%;
+  border-radius: 20px;
 }
 
 .close-icon {
   position: absolute;
-  top: -29px;
-  right: -13px;
-  font-size: 18px;
-  color: white;
+  top: 20px;
+  right: 20px;
+  font-size: 24px;
   cursor: pointer;
-  font-size: smaller;
 }
 
 .close-icon:hover {
   color: #ff0000;
 }
 
-.modal-content h3,
-.modal-content p,
-.modal-content span,
-.modal-content div {
-  color: white;
-}
-/* 
-.pie-chart-container canvas {
-  transition: transform 0.3s ease;
-} */
-
-/* .pie-chart-container canvas:hover {
-  transform: scale(1.05);
-} */
-
-.pie-chart-container canvas {
-  filter: drop-shadow(0 0 10px rgba(200, 200, 200, 0));
-}
-
-/* Container for the chart controls */
-.chart-controls {
-  position: absolute;
-  top: 50px; /* Adjust to align with the heading */
-  left: 800px; /* Adjust as needed */
-  display: flex;
-  gap: 10px; /* Adjust to reduce the space between icons */
-  z-index: 1001; /* Ensure it is on top of the pie chart */
-}
-
-/* Style for the individual chart control icons */
-.chart-control-icon {
-  cursor: pointer;
-  font-size: 18px;
-  color: white;
-  font-weight: normal;
+.modal-content h3 {
+  margin-bottom: 20px;
+  color: #333;
 }

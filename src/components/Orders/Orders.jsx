@@ -328,6 +328,7 @@ export const UseOrdersData = () => {
 
 const Orders = ({ showControls = true }) => {
   const [orders, setOrders] = useState([]);
+  const [selectedStatus, setSelectedStatus] = useState('All'); 
   const [newOrder, setNewOrder] = useState({ product: '', trackingId: '', date: '', status: '',price: '' });
   const [editingOrder, setEditingOrder] = useState(null); 
   const [showChart, setShowChart] = useState(false);
@@ -336,6 +337,9 @@ const Orders = ({ showControls = true }) => {
   useEffect(() => {
     fetchOrders();
   }, []);
+  
+  // Filter orders based on selected status
+  const filteredOrders = selectedStatus === 'All' ? orders : orders.filter(order => order.status === selectedStatus);
 
   const fetchOrders = async () => {
     try {
@@ -348,8 +352,13 @@ const Orders = ({ showControls = true }) => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setNewOrder({ ...newOrder, [name]: value });
+    if (name === 'price') {
+      setNewOrder({ ...newOrder, [name]: parseFloat(value) || '' }); // Ensure price is a number
+    } else {
+      setNewOrder({ ...newOrder, [name]: value });
+    }
   };
+  
 
   const handleAddOrder = async () => {
     const formattedOrder = {
@@ -375,30 +384,32 @@ const Orders = ({ showControls = true }) => {
     setEditingOrder(order);
     setNewOrder({
       product: order.product,
-      price: order.price,
+      price: order.price.toFixed(2),  // Ensure price is a number with two decimal places
       trackingId: order.trackingId,
       date: moment(order.date, 'MM-DD-YYYY').format('YYYY-MM-DD'), 
       status: order.status
     });
   };
+  
 
   const handleSaveEdit = async () => {
     if (!editingOrder) return;
-
+  
     const updatedOrder = {
-        ...newOrder,
-        date: moment(newOrder.date).format('MM-DD-YYYY'),
-        price: parseFloat(newOrder.price),  // Ensure price is a number
+      ...newOrder,
+      date: moment(newOrder.date).format('MM-DD-YYYY'),
+      price: parseFloat(newOrder.price),  // Ensure price is a number
     };
     try {
-        await axios.put(`http://localhost:8080/api/orders/${editingOrder.id}`, updatedOrder);
-        fetchOrders();
-        setEditingOrder(null);
-        setNewOrder({ product: '', price: '', trackingId: '', date: '', status: '' });
+      await axios.put(`http://localhost:8080/api/orders/${editingOrder.id}`, updatedOrder);
+      fetchOrders();
+      setEditingOrder(null);
+      setNewOrder({ product: '', price: '', trackingId: '', date: '', status: '' });
     } catch (error) {
-        console.error('Error saving edited order:', error);
+      console.error('Error saving edited order:', error);
     }
-};
+  };
+  
 
   const toggleChart = () => {
     setShowChart(!showChart);
@@ -433,11 +444,13 @@ const Orders = ({ showControls = true }) => {
         backgroundColor: 'rgba(167, 162, 233, 0.473)',
         fill: true,
         tension: 0.2,
-        borderWidth: 5,
+        borderWidth: 3,
       },
     ],
   };
 
+
+  
   const lineChartOptions = {
     scales: {
       y: {
@@ -454,28 +467,18 @@ const Orders = ({ showControls = true }) => {
 
   const pieChartData = {
     labels: ['Pending', 'In Progress', 'Completed', 'Cancelled'],
-    datasets: [
-      {
-        data: Object.values(statusCounts),
-        backgroundColor: [
-          'rgba(255, 105, 97, 1)',  
-          'rgba(135, 206, 235, 1)',  
-          'rgba(152, 251, 152, 1)',  
-          'rgba(216, 191, 216, 1)'   
-        ],
-        borderColor: [
-          'rgba(255, 105, 97, 1)',  
-          'rgba(135, 206, 235, 1)',  
-          'rgba(152, 251, 152, 1)',  
-          'rgba(216, 191, 216, 1)'   
-        ],
-        borderWidth: 3
-      }
-    ]
+    series: Object.values(statusCounts), // Data for the pie chart
+    colors: [
+      'rgba(255, 105, 97, 1)',  
+      'rgba(135, 206, 235, 1)',  
+      'rgba(152, 251, 152, 1)',  
+      'rgba(216, 191, 216, 1)'   
+    ],
   };
 
   return (
     <div className="orders-container">
+     
       {showControls && (
         <>
           <h3>{editingOrder ? 'Edit Order' : 'Add New Order'}</h3>
@@ -483,14 +486,35 @@ const Orders = ({ showControls = true }) => {
           <input type="number" name="price" value={newOrder.price} onChange={handleInputChange}  placeholder="Price"/>
           <input type="text" name="trackingId" value={newOrder.trackingId} onChange={handleInputChange} placeholder="Tracking ID" />
           <input type="date" name="date" value={newOrder.date} onChange={handleInputChange} />
-          <input type="text" name="status" value={newOrder.status} onChange={handleInputChange} placeholder="Status" />
+          
+          <select className='sel' type="text" name="status" value={newOrder.status} onChange={handleInputChange} placeholder="Status" >
+             <option value="">Select Status</option>
+             <option value="Pending">Pending</option>
+             <option value="In-Progress">In-Progress</option>
+             <option value="Completed">Completed</option>
+             <option value="Cancelled">Cancelled</option>
+         </select>
           <button onClick={editingOrder ? handleSaveEdit : handleAddOrder}>
             {editingOrder ? 'Save Changes' : 'Add Order'}
           </button>
         </>
       )}
-
+      <br></br>
+ {/* Filter Dropdown */}
+ {showControls && (
+ <div className="filter-container">
+        <h4><label htmlFor="statusFilter">Filter by Status: </label></h4>
+        <select id="statusFilter" value={selectedStatus} onChange={(e) => setSelectedStatus(e.target.value)}>
+          <option value="All">All</option>
+          <option value="Pending">Pending</option>
+          <option value="In Progress">In Progress</option>
+          <option value="Completed">Completed</option>
+          <option value="Cancelled">Cancelled</option>
+        </select>
+      </div>
+ )}
       {showControls && <h2>Orders</h2>}
+
       <div className="orders-table-container">
         <table className="orders-table">
           <thead>
@@ -504,7 +528,7 @@ const Orders = ({ showControls = true }) => {
             </tr>
           </thead>
           <tbody>
-            {orders.map(order => (
+            {filteredOrders.map(order => (
               <tr key={order.id}>
                 <td>{order.product}</td>
                 <td>{order.price}</td> 

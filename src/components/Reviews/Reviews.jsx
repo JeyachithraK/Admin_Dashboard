@@ -192,9 +192,9 @@ const Reviews = () => {
                        <FaChartPie size={24} />
                        {/* <span className="order-distribution">Review-Distribution</span> */}
                        <span onClick={toggleLineChart} className="chart-toggle">
-                         {showLineChart ? 'Hide line chart' : 'Click to view line chart'}
+                         {showLineChart ? 'Hide line chart' : 'Line Chart'}
                         <div className="pie-chart-icon-container">
-                         <i className="fas fa-chart-pie pie-chart-icon"></i>
+                         <i className="fas fa-chart-line line-chart-icon"></i>
                         </div>
                       </span>
                       <FaChartLine size={24} />
@@ -234,7 +234,7 @@ const Reviews = () => {
                               {/* <span>Ratings Distribution</span> */}
                               <span>Click to view pie chart
                                 <div className="icon-container">
-                                    <i className="fas fa-chart-line line-chart-icon"></i>
+                                    <i className="fas fa-chart-pie pie-chart-icon"></i>
                                 </div>
                               </span>
                           

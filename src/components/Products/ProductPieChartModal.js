@@ -70,10 +70,10 @@ const ProductPieChartModal = ({ show, onClose, chartData }) => {
     <div className="modal-overlay">
       <div className="modal-content">
         <div className="chart-controls">
-          <FaSearchPlus onClick={handleZoomIn} className="chart-control-icon" />
+          {/* <FaSearchPlus onClick={handleZoomIn} className="chart-control-icon" />
           <FaSearchMinus onClick={handleZoomOut} className="chart-control-icon" />
           <FaHome onClick={handleResetZoom} className="chart-control-icon" />
-          <FaDownload onClick={handleDownload} className="chart-control-icon" />
+          <FaDownload onClick={handleDownload} className="chart-control-icon" /> */}
           <FaTimes onClick={onClose} className="chart-control-icon close-icon" />
         </div>
         <h3>Product Price Distribution</h3>

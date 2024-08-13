@@ -34,9 +34,13 @@ const LineChartComponent = ({ data }) => {
       {
         label: 'Rating',
         data: data.map(review => review.rating),
-        fill: false,
-        backgroundColor: 'rgba(75, 192, 192, 0.6)',
-        borderColor: 'rgba(75, 192, 192, 1)',
+        fill: true,
+         // Set the style of the point markers
+        pointRadius: 3, 
+        backgroundColor: 'rgba(173, 216, 230, 0.5)', // Light blue with transparency
+        borderColor: 'rgb(99, 168, 242)', // A distinct blue color for the line
+        borderWidth: 3,
+        tension: 0.4,
       },
     ],
   };

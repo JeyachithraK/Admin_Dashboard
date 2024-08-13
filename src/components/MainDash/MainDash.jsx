@@ -13,6 +13,7 @@ const MainDash = () => {
       <h2>Recent Orders</h2>
       <div className="recent-orders-container">
         <Orders showControls={false} /> {/* Pass prop to hide controls */}
+
       </div>
     </div>
   );

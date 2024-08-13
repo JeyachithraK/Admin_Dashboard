@@ -45,9 +45,17 @@ const Login = () => {
         <div className="login-header"></div>
         <div className="login-welcome">
           <h2>Welcome Back</h2>
-          <p>Login to access your account</p>
+          <p className='wel'>Login to access your account</p>
+          <dotlottie-player 
+        src="https://lottie.host/b46f7d74-639d-45b4-ad4d-ae2fc17e827f/fTsv6H9b71.json" 
+        background="transparent" 
+        speed="1" 
+        style={{ width: '350px', height: '350px'}} 
+        loop 
+        autoplay
+      ></dotlottie-player>
         </div>
-      </div>
+</div>
       <div className="login-right">
         <div className="login-box">
           <form onSubmit={handleSubmit}>

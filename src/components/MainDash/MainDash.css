@@ -24,9 +24,15 @@
   /* Adjust height as needed */
   height: 400px; /* Set the height you need */
   overflow-y: auto; /* Enable vertical scrolling if content overflows */
-  margin-bottom: 0; /* Remove bottom margin */
+  margin-bottom: 80; /* Remove bottom margin */
   padding-bottom: 0; /* Remove bottom padding */
+  
 }
+/* .orders-container:hover{
+  transform: scale(1.0);
+  box-shadow: 0 30px 60px rgba(245, 249, 118, 0.541);
+
+} */
 .MainDash .updates-section {
   margin-bottom: 20px;
   padding: 10px;

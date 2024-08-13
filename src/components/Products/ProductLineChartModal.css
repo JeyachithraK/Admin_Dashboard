@@ -1,0 +1,45 @@
+/* ProductLineChartModal.css */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .modal-content {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    position: relative;
+  }
+  
+  .close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: transparent;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+  }
+  .chart-title {
+    color: #0f486e; /* Change this to your desired color */
+    font-size: 24px;
+    margin-bottom: 15px; /* Adjust spacing as needed */
+
+  }
+  /* .chart-container {
+    transition: opacity 0.3s ease;
+  }
+  
+  .chart-container.faded {
+    opacity: 0.5; /* Adjust this value for the desired fading effect */
+  /* }  */
+  .close-btn{
+    color: aqua;
+  }
