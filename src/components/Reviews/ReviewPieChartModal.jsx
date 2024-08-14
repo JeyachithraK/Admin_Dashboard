@@ -21,16 +21,15 @@ const ReviewPieChartModal = ({ show, onClose, chartData }) => {
       position: 'bottom',
       color : "white",
     },
-    // If you want to use the `responsive` option, it should look something like this:
     responsive: [
       {
-        breakpoint: 1000, // Example breakpoint
+        breakpoint: 1000, 
         options: {
           chart: {
-            width: '100%', // Width for this breakpoint
+            width: '100%',
           },
           legend: {
-            position: 'bottom', // Legend position for this breakpoint
+            position: 'bottom', 
           },
         },
       },

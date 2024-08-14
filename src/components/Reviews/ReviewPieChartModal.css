@@ -1,4 +1,4 @@
-.modal-overlay {
+/* .modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -28,8 +28,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  /* margin: 0 auto; */
-  /* margin-bottom: 520px; */
+  margin: 0 auto; */
+  /* margin-bottom: 520px;
   margin-left: 50px;
   width: 100%;
   height: 100%;
@@ -38,8 +38,8 @@
 
 .close-icon {
   position: absolute;
-  /* top: 15px !important;
-  right: 20px !important; */
+  top: 15px !important;
+  right: 20px !important;
   font-size: 24px;
   cursor: pointer;
 }
@@ -51,4 +51,4 @@
 .modal-content h3 {
   margin-bottom: 20px;
   color: #333;
-}
+} */

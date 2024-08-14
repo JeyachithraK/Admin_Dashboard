@@ -86,6 +86,7 @@ const Customers = () => {
 
   const toggleLineChart = () => {
     setShowLineChart(!showLineChart);
+    console.log(showLineChart)
   };
 
   const statusCounts = customers.reduce((acc, customer) => {
@@ -99,7 +100,7 @@ const Customers = () => {
     datasets: [
       {
         data: Object.values(statusCounts),
-        backgroundColor: ['rgba(75, 192, 192, 0.2)', 'rgba(255, 206, 86, 0.2)'],
+backgroundColor: ['rgba(50, 150, 150, 0.6)', 'rgba(230, 186, 77, 0.6)'],
         borderColor: ['rgba(75, 192, 192, 1)', 'rgba(255, 206, 86, 1)'],
         borderWidth: 3,
       },
@@ -188,7 +189,7 @@ const Customers = () => {
       <div className="mm">
         <div className="box-above-link">
           <FaChartPie size={24} />
-          <span className="order-distribution">Rate-Distribution</span>
+          <span className="order-distribution">Customer-Distribution</span>
           <a href="#" onClick={toggleChart}>
             <div className="pie-chart-icon-container">
               <i className="fas fa-chart-pie pie-chart-icon"></i>
@@ -201,7 +202,7 @@ const Customers = () => {
         <div className="box-above-link">
           <FaChartPie size={24} />
           <FaChartLine size={24} />
-          <span className="order-distribution">Rate-Order-Distribution</span>
+          <span className="order-distribution">Customer-Distribution</span>
           <a href="#" onClick={toggleLineChart}>
             <div className="icon-container">
               <i className="fas fa-chart-line graph-icon"></i>
@@ -218,9 +219,8 @@ const Customers = () => {
         chartData={chartData}
       />
       {showLineChart && (
-        <div className="line-chart-container">
           <Line data={lineChartData} />
-        </div>
+        
       )}
     </div>
   );

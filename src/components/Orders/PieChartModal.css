@@ -7,21 +7,24 @@
   background: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: center;    
   z-index: 1000;
 }
 
 .modal-content {
+  background: radial-gradient(circle, #9fb7ee,#c5c9d3) !important;
+  
   background-color: #a92424;
   padding: 20px;
+  padding-bottom: 80px !important;
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   text-align: center;
-  width: 90%;
-  max-width: 900px;
+  width: 100%;
+  /* max-width: 900px; */
   position: relative;
   z-index: 1001;
-  height: 80%;
+  height: 100%;
 }
 
 .pie-chart-container {
@@ -30,17 +33,16 @@
   align-items: center;
   /* margin: 0 auto; */
   /* margin-bottom: 520px; */
-  margin-left: 50px;
+  /* margin-left: 50px; */
   width: 100%;
   height: 100%;
+  margin-bottom: 200px;
   border-radius: 20px;
 }
 
 .close-icon {
   position: absolute;
-  top: 20px;
-  right: 20px;
-  font-size: 24px;
+ font-size: 24px;
   cursor: pointer;
 }
 

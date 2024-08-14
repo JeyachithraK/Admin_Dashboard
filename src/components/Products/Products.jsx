@@ -169,7 +169,7 @@ const Products = () => {
         label: 'Product Prices',
         data: products.map(product => parseFloat(product.price)),
         fill: false,
-        borderColor: 'rgba(75, 192, 192, 1)',
+        backgroundColor: 'rgba(30, 115, 115, 1)',
         tension: 0.1,
       },
     ],

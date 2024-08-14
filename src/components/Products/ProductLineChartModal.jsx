@@ -10,7 +10,7 @@ const ProductLineChartModal = ({ show, onClose, chartData }) => {
   return (
     <div className="modal-overlay">
       <div className="modal-content">
-        <button className="close-btn" onClick={onClose}>X</button>
+        <button className="close-btn1" onClick={onClose}>X</button>
         <Line data={chartData} />
       </div>
     </div>

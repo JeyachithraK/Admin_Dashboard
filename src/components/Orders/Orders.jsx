@@ -256,8 +256,7 @@ import { Chart as ChartJS, LineElement, CategoryScale, LinearScale, PointElement
 import { Line } from 'react-chartjs-2';
 import { FaChartPie, FaChartLine, FaChartBar, FaChartArea } from 'react-icons/fa';
 import PieChartModal from './PieChartModal';
-// export let revenue = 1000000;
-// export let revenueSeries = [];
+
 ChartJS.register(LineElement, CategoryScale, LinearScale, PointElement, Tooltip, Legend);
 
 export const UseOrdersData = () => {
@@ -273,9 +272,7 @@ export const UseOrdersData = () => {
         const orders = response.data;
         console.log(orders);
 
-        // Ensure that orders are not null or undefined
         if (orders && Array.isArray(orders)) {
-          // Calculate total revenue from completed orders
           const totalRevenue = orders.reduce((acc, order) => {
             if (order.price && order.status === 'Completed') {
               return acc + parseFloat(order.price);
@@ -283,7 +280,6 @@ export const UseOrdersData = () => {
             return acc;
           }, 0);
 
-          // Prepare revenue series data
           const revenueSeriesData = orders
             .filter(order => order.status === 'Completed')
             .map(order => parseFloat(order.price));
@@ -291,7 +287,6 @@ export const UseOrdersData = () => {
           setRevenue(totalRevenue);
           setRevenueSeries(revenueSeriesData);
 
-          // Calculate total loss from cancelled orders
           const totalLoss = orders.reduce((acc, order) => {
             if (order.price && order.status === 'Cancelled') {
               return acc + parseFloat(order.price);
@@ -299,7 +294,6 @@ export const UseOrdersData = () => {
             return acc;
           }, 0);
 
-          // Prepare loss series data
           const lossSeriesData = orders
             .filter(order => order.status === 'Cancelled')
             .map(order => parseFloat(order.price));
@@ -307,7 +301,6 @@ export const UseOrdersData = () => {
           setLoss(totalLoss);
           setLossSeries(lossSeriesData);
 
-          // Debugging output
           console.log('Total Revenue:', totalRevenue);
           console.log('Revenue Series Data:', revenueSeriesData);
           console.log('Total Loss:', totalLoss);
@@ -338,7 +331,6 @@ const Orders = ({ showControls = true }) => {
     fetchOrders();
   }, []);
   
-  // Filter orders based on selected status
   const filteredOrders = selectedStatus === 'All' ? orders : orders.filter(order => order.status === selectedStatus);
 
   const fetchOrders = async () => {
@@ -364,7 +356,7 @@ const Orders = ({ showControls = true }) => {
     const formattedOrder = {
         ...newOrder,
         date: moment(newOrder.date).format('MM-DD-YYYY'),
-        price: parseFloat(newOrder.price),  // Ensure price is a number
+        price: parseFloat(newOrder.price), 
     };
     await axios.post('http://localhost:8080/api/orders', formattedOrder);
     fetchOrders();
@@ -384,7 +376,7 @@ const Orders = ({ showControls = true }) => {
     setEditingOrder(order);
     setNewOrder({
       product: order.product,
-      price: order.price.toFixed(2),  // Ensure price is a number with two decimal places
+      price: order.price.toFixed(2),  
       trackingId: order.trackingId,
       date: moment(order.date, 'MM-DD-YYYY').format('YYYY-MM-DD'), 
       status: order.status
@@ -398,7 +390,7 @@ const Orders = ({ showControls = true }) => {
     const updatedOrder = {
       ...newOrder,
       date: moment(newOrder.date).format('MM-DD-YYYY'),
-      price: parseFloat(newOrder.price),  // Ensure price is a number
+      price: parseFloat(newOrder.price), 
     };
     try {
       await axios.put(`http://localhost:8080/api/orders/${editingOrder.id}`, updatedOrder);
@@ -467,14 +459,15 @@ const Orders = ({ showControls = true }) => {
 
   const pieChartData = {
     labels: ['Pending', 'In Progress', 'Completed', 'Cancelled'],
-    series: Object.values(statusCounts), // Data for the pie chart
+    series: Object.values(statusCounts),
     colors: [
-      'rgba(255, 105, 97, 1)',  
-      'rgba(135, 206, 235, 1)',  
-      'rgba(152, 251, 152, 1)',  
-      'rgba(216, 191, 216, 1)'   
+      'rgba(173, 216, 230, 1)',  // Light Blue
+      'rgba(135, 206, 235, 1)',  // Light Sky Blue
+      'rgba(152, 251, 152, 1)',  // Pale Green
+      'rgba(216, 191, 216, 1)'   // Thistle
     ],
-  };
+};
+
 
   return (
     <div className="orders-container">

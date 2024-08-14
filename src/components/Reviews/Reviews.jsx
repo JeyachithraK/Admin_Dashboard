@@ -3,18 +3,17 @@ import axios from 'axios';
 import './Reviews.css';
 import ReviewPieChartModal from './ReviewPieChartModal';
 import LineChartComponent from './LineChart';
-import BarChartComponent from './BarChartComponent'; // Import the BarChart component
+import BarChartComponent from './BarChartComponent'; 
 import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import { motion } from 'framer-motion';
 import { FaChartPie, FaChartLine, FaChartBar, FaChartArea } from 'react-icons/fa';
 
-
 const Reviews = () => {
   const [reviews, setReviews] = useState([]);
   const [showChart, setShowChart] = useState(false);
   const [showLineChart, setShowLineChart] = useState(false);
-  const [showBarChart, setShowBarChart] = useState(false); // State to toggle bar chart
+  const [showBarChart, setShowBarChart] = useState(false); 
   const [newReview, setNewReview] = useState({ reviewer: '', comment: '', rating: '' });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -206,7 +205,7 @@ const Reviews = () => {
                      <FaChartLine size={24} />
                      {/* <span className="order-distribution">Line-Order-Distribution</span> */}
                      <span onClick={toggleBarChart} className="chart-toggle">
-                        {showBarChart ? 'Hide bar chart' : 'Click to view bar chart'}
+                        {showBarChart ? 'Hide bar chart' : 'Bar chart'}
                         <div className="icon-container">
                           {/* <i className="fas fa-chart-line line-chart-icon"></i> */}
                           <i className="fas fa-chart-bar bar-chart-icon"></i>
